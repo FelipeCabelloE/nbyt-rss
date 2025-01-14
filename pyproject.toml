@@ -1,26 +1,27 @@
-[tool.poetry]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
 name = "nbyt-rss"
 version = "0.4.7"
 description = "Simple CLI app to add YouTube RSS feeds correctly."
-authors = ["Evan Baird <mrcartoonster@gmail.com>"]
+authors = [{ name = "Evan Baird", email = "mrcartoonster@gmail.com" }]
+requires-python = "~=3.12"
 readme = "README.md"
+dependencies = [
+    "typer>=0.12.5,<0.13",
+    "httpx>=0.27.2,<0.28",
+    "yarl>=1.11.1,<2",
+    "parsel>=1.9.1,<2",
+    "rich>=13.8.1,<14",
+]
 
-[tool.poetry.scripts]
+[project.scripts]
 nbyt-rss = "nbyt_rss.main:app"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-typer = "^0.12.5"
-httpx = "^0.27.2"
-yarl = "^1.11.1"
-parsel = "^1.9.1"
-rich = "^13.8.1"
-
-
-[tool.poetry.group.dev.dependencies]
-pre-commit = "^3.8.0"
-ipython = "^8.27.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "pre-commit>=3.8.0,<4",
+    "ipython>=8.27.0,<9",
+]
